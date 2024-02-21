@@ -1,0 +1,11 @@
+SELECT 
+    suppliers.supplier AS Поставщик ,
+    categories.category AS Категория,
+    SUM(actions.qty * actions.price) AS Итоговая_сумма
+FROM actions
+JOIN suppliers ON actions.supplier_id = supplier_id
+JOIN products ON actions.product_id = products.id
+JOIN categories ON products.category_id = categories.id
+WHERE YEAR(actions.action_date) = 2016
+GROUP BY suppliers.supplier, categories.category
+ORDER BY suppliers.supplier;

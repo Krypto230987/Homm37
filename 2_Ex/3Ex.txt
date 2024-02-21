@@ -1,0 +1,11 @@
+SELECT 
+    categories.category AS Название_категории,
+    YEAR(actions.action_date) AS Год,
+    AVG(actions.price) AS Средняя_цена,
+    MAX(actions.price) AS Максимальная_цена,
+    MIN(actions.price) AS Минимальная_цена
+FROM actions
+JOIN products ON actions.product_id = products.id
+JOIN categories ON products.category_id = categories.id
+GROUP BY products.category_id, YEAR(actions.action_date)
+ORDER BY products.category_id, YEAR(actions.action_date);

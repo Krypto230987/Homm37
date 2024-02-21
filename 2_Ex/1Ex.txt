@@ -1,0 +1,7 @@
+SELECT 
+    COALESCE(brands.brand, 'Без бренда') AS Бренд,
+    SUM(actions.qty * actions.price) AS Сумма_поставок
+FROM actions
+JOIN products ON actions.product_id = products.id
+LEFT JOIN brands ON products.brand_id = brands.id
+GROUP BY COALESCE(brands.brand, 'Без бренда');
